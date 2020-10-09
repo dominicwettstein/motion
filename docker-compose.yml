@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  backend:
+    image: registry.gitlab.propulsion-home.ch/dominic-wettstein/week-8/motion:latest
+    restart: always
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./backend:/backend
+      - ./files-media:/files-media
+      - ./files-static:/files-static
+    command: 'sh /scripts/dev.sh'
+    env_file:
+      - env/dev.env
+    depends_on:
+      - db
+
+  db:
+    image: postgres:12
+    env_file:
+      - env/dev.env
+    volumes:
+      - motion_db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+volumes:
+  motion_db:
+  files-media:
+  files-static:
+
+

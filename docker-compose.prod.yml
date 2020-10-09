@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  backend:
+    image: registry.gitlab.propulsion-home.ch/dominic-wettstein/week-8/motion:master
+    command: 'sh /scripts/deploy.sh'
+    restart: always
+    volumes:
+      - files-static:/files-static
+      - files-media:/files-media
+      - frontend:/frontend/build
+    depends_on:
+      - db
+    env_file:
+      - env/prod.env
+
+  db:
+    image: postgres:12
+    env_file:
+      - env/prod.env
+    volumes:
+      - motion_db:/var/lib/postgresql/data
+
+  nginx:
+    image: nginx:latest
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - files-static:/files-static
+      - files-media:/files-media
+      - /etc/letsencrypt:/etc/letsencrypt
+      - frontend:/frontend
+    depends_on:
+      - backend
+
+
+volumes:
+  motion_db:
+  files-static:
+  files-media:
+  frontend:
