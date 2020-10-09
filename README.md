@@ -1,19 +1,5 @@
 # Motion Project
-
-## App link:
-https://www.dominic-motion.propulsion-learn.ch
-
-## New features in frontend:
-- Password reset pages
-- Image upload in post
-- Image lightbox when clicking on post images
-- Url in post
-- Url preview when viewing posts
-- Share functionality
-- Comment functionality
-- Feed display with masonry grid style
-- Working "things user likes"
-- Showing full info in all user profile pages
+Learning project created during the Full Stack Bootcamp at Propulsion Academy Zurich in Summer 2020.
 
 ## Further notes:
 - For feature details about frontend and backend, see readme's in the respective folders.
